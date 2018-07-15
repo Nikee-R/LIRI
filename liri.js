@@ -1,6 +1,6 @@
 // This makes it so the code can read and set any environment variables with the dotenv package.
 
-require("dotenv").config();
+var dotenv = require("dotenv").config();
 
 // ===================== Global Variables ===================== //
 
@@ -8,14 +8,14 @@ require("dotenv").config();
 var fs = require('fs');
 var request = require('request');
 var Twitter =  require('twitter');
-var spotify = require('node-spotify-api');
+var Spotify = require('node-spotify-api');
 
 // Grabs key data.
 var keys = require('./keys.js');
 
 // Twitter keys
 var client = new Twitter(keys.twitter);
-
+var spotify = new Spotify(keys.spotify)
 // User inputs
 var arguments = process.argv;
 var command = process.argv[2];
@@ -93,7 +93,7 @@ function song(input) {
               console.log('Album: ' + songInfo.album.name);
 
               // This will add info to log.txt.
-              fs.appendFile('log.txt', sonInfo.artists[0].name);
+              fs.appendFile('log.txt', songInfo.artists[0].name);
               fs.appendFile('log.txt', songInfo.name);
               fs.appendFile('log.txt', songInfo.preview_url);
               fs.appendFile('log.txt', songInfo.album.name);
